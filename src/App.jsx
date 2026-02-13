@@ -58,14 +58,14 @@ const Notification = ({ message, type, onClose }) => {
   }, [onClose]);
 
   const styles = {
-    success: 'bg-teal-700 border-teal-600 shadow-teal-900/20',
-    info: 'bg-blue-700 border-blue-600 shadow-blue-900/20',
-    warning: 'bg-amber-600 border-amber-500 shadow-amber-900/20',
-    error: 'bg-red-800 border-red-700 shadow-red-900/20'
+    success: 'bg-emerald-600 border-emerald-500 shadow-emerald-500/20',
+    info: 'bg-blue-600 border-blue-500 shadow-blue-500/20',
+    warning: 'bg-amber-500 border-amber-400 shadow-amber-500/20',
+    error: 'bg-rose-600 border-rose-500 shadow-rose-500/20'
   };
 
   return (
-    <div className={`fixed bottom-6 right-6 ${styles[type] || 'bg-slate-800'} text-white px-6 py-4 rounded-lg shadow-2xl flex items-center animate-in slide-in-from-right-10 z-50 border border-white/10 backdrop-blur-md`}>
+    <div className={`fixed bottom-6 right-6 ${styles[type] || 'bg-slate-800'} text-white px-6 py-4 rounded-xl shadow-2xl flex items-center animate-in slide-in-from-right-10 z-50 border border-opacity-50 backdrop-blur-md`}>
       {type === 'success' && <CheckCircle2 className="w-5 h-5 mr-3 text-white" />}
       {type === 'warning' && <AlertTriangle className="w-5 h-5 mr-3 text-white" />}
       {type === 'info' && <Activity className="w-5 h-5 mr-3 text-white" />}
@@ -78,16 +78,16 @@ const InvoiceModal = ({ invoice, onClose }) => {
   if (!invoice) return null;
 
   return (
-    <div className="fixed inset-0 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-300">
-      <div className="bg-white w-full max-w-2xl rounded-xl shadow-2xl overflow-hidden border border-slate-200 transform transition-all scale-100">
-        <div className="bg-[#0f172a] p-6 flex justify-between items-center border-b border-slate-700">
+    <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-300">
+      <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden border border-slate-100 transform transition-all scale-100">
+        <div className="bg-gradient-to-r from-[#0f172a] to-[#1e293b] p-6 flex justify-between items-center">
           <div className="flex items-center text-white">
             <div className="p-2 bg-white/10 rounded-lg mr-3">
-              <FileText className="w-6 h-6 text-teal-400" />
+              <FileText className="w-5 h-5 text-rose-400" />
             </div>
             <div>
-              <span className="font-bold text-lg block tracking-tight">Invoice Details</span>
-              <span className="text-xs text-slate-400 font-medium tracking-wide uppercase">{invoice.id || 'INV-Generated'}</span>
+              <span className="font-bold text-lg block">Invoice Details</span>
+              <span className="text-xs text-slate-400 font-medium tracking-wide">{invoice.id || 'INV-Generated'}</span>
             </div>
           </div>
           <button onClick={onClose} className="text-slate-400 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all">
@@ -95,50 +95,46 @@ const InvoiceModal = ({ invoice, onClose }) => {
           </button>
         </div>
 
-        <div className="p-8 space-y-8">
+        <div className="p-8 space-y-6">
           <div className="flex justify-between items-start border-b border-slate-100 pb-6">
-            <div className="w-3/4">
-              <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Item Description</p>
-              <h3 className="font-bold text-[#0f172a] text-xl leading-snug">{invoice.item}</h3>
-              <div className="flex items-center mt-3 gap-2">
-                <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded border border-slate-200 font-mono">Batch: {invoice.batch}</span>
-                <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded border border-slate-200 font-mono">Code: 004456</span>
+            <div>
+              <p className="text-xs text-slate-400 uppercase tracking-wider font-bold mb-1">Item Description</p>
+              <h3 className="font-bold text-[#0f172a] text-xl leading-tight">{invoice.item}</h3>
+              <div className="flex items-center mt-2">
+                <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-md font-mono border border-slate-200">Batch: {invoice.batch}</span>
               </div>
             </div>
             <div className="text-right">
-              <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Period</p>
-              <span className="font-bold text-slate-800 bg-slate-50 px-3 py-1.5 rounded-lg text-sm border border-slate-200 block">{invoice.month}</span>
+              <p className="text-xs text-slate-400 uppercase tracking-wider font-bold mb-1">Period</p>
+              <span className="font-bold text-slate-700 bg-slate-50 px-3 py-1 rounded-full text-sm border border-slate-200">{invoice.month}</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-6">
-            <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-              <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-1">Agreed Margin</p>
-              <p className="font-bold text-slate-800 text-xl">4.00%</p>
+          <div className="grid grid-cols-2 gap-6">
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+              <p className="text-xs text-slate-500 font-medium mb-1">Agreed Margin Cap</p>
+              <p className="font-bold text-slate-800 text-lg">4.00%</p>
             </div>
-            <div className="bg-red-50 p-4 rounded-lg border border-red-100">
-              <p className="text-[10px] text-red-700 font-bold uppercase tracking-wider mb-1">Charged Margin</p>
-              <p className="font-bold text-red-700 text-xl">{invoice.margin || '5.20'}%</p>
-            </div>
-            <div className="bg-red-50 p-4 rounded-lg border border-red-100">
-              <p className="text-[10px] text-red-700 font-bold uppercase tracking-wider mb-1">Excess Payout</p>
-              <p className="font-bold text-red-700 text-xl">{invoice.excess}</p>
+            <div className="bg-rose-50 p-4 rounded-xl border border-rose-100">
+              <p className="text-xs text-rose-600 font-medium mb-1">Actual Margin Charged</p>
+              <p className="font-bold text-rose-700 text-lg">{invoice.margin || '5.20'}%</p>
             </div>
           </div>
 
-          <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 flex items-start gap-3">
-            <Info className="w-5 h-5 text-slate-400 mt-0.5 flex-shrink-0" />
-            <p className="text-sm text-slate-600 leading-relaxed">
-              This invoice has been flagged for audit. The charged margin exceeds the contractual limit of 4%. Recommended action is to withhold payment of the excess amount and notify the vendor.
-            </p>
+          <div className="bg-gradient-to-r from-rose-50 to-white p-5 rounded-xl border border-rose-100 flex justify-between items-center shadow-sm">
+            <div className="flex items-center">
+              <AlertCircle className="w-5 h-5 text-rose-500 mr-3" />
+              <span className="text-sm font-semibold text-rose-900">Excess Payout Detected</span>
+            </div>
+            <span className="font-bold text-rose-600 text-xl">{invoice.excess}</span>
           </div>
 
-          <div className="flex space-x-4 pt-2">
-            <button className="flex-1 bg-[#0f172a] text-white py-3 rounded-lg text-sm font-bold hover:bg-[#1e293b] shadow-lg shadow-slate-900/10 transition-all flex items-center justify-center">
-              <Printer className="w-4 h-4 mr-2" /> Print Record
+          <div className="flex space-x-4 pt-4">
+            <button className="flex-1 bg-[#0f172a] text-white py-3 rounded-xl text-sm font-semibold hover:bg-[#1e293b] hover:shadow-lg transition-all flex items-center justify-center group">
+              <Printer className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" /> Print Record
             </button>
-            <button className="flex-1 bg-white border border-slate-300 text-slate-700 py-3 rounded-lg text-sm font-bold hover:bg-slate-50 transition-all flex items-center justify-center">
-              <Share2 className="w-4 h-4 mr-2" /> Share Report
+            <button className="flex-1 border border-slate-200 text-slate-600 py-3 rounded-xl text-sm font-semibold hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center justify-center">
+              <Share2 className="w-4 h-4 mr-2" /> Share with Audit
             </button>
           </div>
         </div>
@@ -148,7 +144,7 @@ const InvoiceModal = ({ invoice, onClose }) => {
 };
 
 // --- Helper for Curve Chart ---
-const SvgCurveChart = ({ data, color = "#7f1d1d", height = 60 }) => {
+const SvgCurveChart = ({ data, color = "#be185d", height = 60 }) => {
   if (!data || data.length === 0) return null;
   const maxVal = Math.max(...data.map(d => d.amount));
   const points = data.map((d, i) => {
@@ -173,7 +169,7 @@ const SvgCurveChart = ({ data, color = "#7f1d1d", height = 60 }) => {
       <polyline
         fill="none"
         stroke={color}
-        strokeWidth="2"
+        strokeWidth="2.5"
         points={points}
         vectorEffect="non-scaling-stroke"
         strokeLinecap="round"
@@ -184,12 +180,12 @@ const SvgCurveChart = ({ data, color = "#7f1d1d", height = 60 }) => {
           key={i}
           cx={(i / (data.length - 1)) * 100}
           cy={100 - (d.amount / maxVal) * 100}
-          r="2.5"
+          r="2"
           fill="white"
           stroke={color}
           strokeWidth="2"
           vectorEffect="non-scaling-stroke"
-          className="hover:r-4 transition-all cursor-pointer"
+          className="hover:r-3 transition-all cursor-pointer"
         />
       ))}
     </svg>
@@ -224,51 +220,51 @@ const DetailsView = ({ onBack }) => {
   });
 
   return (
-    <div className="h-screen bg-slate-50 font-sans text-slate-800 animate-in slide-in-from-right duration-500 flex flex-col w-full">
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 animate-in slide-in-from-right duration-500">
       {/* Header */}
-      <div className="bg-white/80 backdrop-blur-xl border-b border-slate-200 sticky top-0 z-20 shrink-0 shadow-sm">
-        <div className="w-full px-8">
+      <div className="bg-white/80 backdrop-blur-xl border-b border-slate-200 sticky top-0 z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
               <button
                 onClick={onBack}
-                className="mr-6 p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-500 hover:text-[#0f172a] border border-transparent hover:border-slate-200"
+                className="mr-6 p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-500 hover:text-[#0f172a]"
               >
-                <ArrowLeft className="w-5 h-5" />
+                <ArrowLeft className="w-6 h-6" />
               </button>
               <div>
                 <h1 className="text-2xl font-bold text-[#0f172a] flex items-center tracking-tight">
-                  <div className="bg-teal-50 p-2 rounded-lg mr-3 border border-teal-100">
-                    <FileText className="w-5 h-5 text-teal-700" />
+                  <div className="bg-rose-100 p-1.5 rounded-lg mr-3">
+                    <FileText className="w-5 h-5 text-rose-600" />
                   </div>
                   Consolidated Cash Flow Details
                 </h1>
-                <p className="text-sm text-slate-500 mt-1 ml-1">Reporting Period: <span className="font-semibold text-slate-700">April 2025 - October 2025</span></p>
+                <p className="text-sm text-slate-500 mt-0.5 ml-1">Period: <span className="font-semibold text-slate-700">April 2025 - October 2025</span></p>
               </div>
             </div>
             <div className="flex space-x-4 relative">
               <button
                 onClick={() => setFilterOpen(!filterOpen)}
-                className={`flex items-center px-4 py-2.5 border rounded-lg text-sm font-semibold transition-all shadow-sm ${filterOpen || selectedCategory !== 'All' || selectedStatus !== 'All'
+                className={`flex items-center px-4 py-2.5 border rounded-xl text-sm font-semibold transition-all shadow-sm ${filterOpen || selectedCategory !== 'All' || selectedStatus !== 'All'
                     ? 'bg-slate-100 border-slate-300 text-slate-900'
-                    : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50'
+                    : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300'
                   }`}
               >
                 <Filter className="w-4 h-4 mr-2" /> Filter
                 {(selectedCategory !== 'All' || selectedStatus !== 'All') && (
-                  <span className="ml-2 w-2 h-2 bg-teal-600 rounded-full animate-pulse"></span>
+                  <span className="ml-2 w-2 h-2 bg-rose-500 rounded-full animate-pulse"></span>
                 )}
               </button>
 
               {/* Filter Dropdown */}
               {filterOpen && (
-                <div className="absolute right-0 top-full mt-3 w-72 bg-white rounded-xl shadow-2xl border border-slate-200 p-5 z-30 animate-in fade-in slide-in-from-top-2 ring-1 ring-black/5">
+                <div className="absolute right-0 top-full mt-3 w-72 bg-white rounded-2xl shadow-2xl border border-slate-100 p-5 z-30 animate-in fade-in slide-in-from-top-2 ring-1 ring-black/5">
                   <div className="mb-5">
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Category</label>
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Category</label>
                     <select
                       value={selectedCategory}
                       onChange={(e) => setSelectedCategory(e.target.value)}
-                      className="w-full p-2.5 border border-slate-300 rounded-lg text-sm bg-slate-50 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                      className="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-slate-50 focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all"
                     >
                       <option value="All">All Categories</option>
                       <option value="Pharmacy Procurement">Pharmacy Procurement</option>
@@ -277,15 +273,15 @@ const DetailsView = ({ onBack }) => {
                     </select>
                   </div>
                   <div className="mb-5">
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Status</label>
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Status</label>
                     <div className="flex space-x-2">
                       {['All', 'Cleared', 'Pending'].map(status => (
                         <button
                           key={status}
                           onClick={() => setSelectedStatus(status)}
                           className={`flex-1 py-2 text-xs rounded-lg border font-medium transition-all ${selectedStatus === status
-                              ? 'bg-teal-50 border-teal-200 text-teal-800 shadow-sm'
-                              : 'bg-white border-slate-300 text-slate-600 hover:bg-slate-50'
+                              ? 'bg-rose-50 border-rose-200 text-rose-700 shadow-sm'
+                              : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                             }`}
                         >
                           {status}
@@ -299,7 +295,7 @@ const DetailsView = ({ onBack }) => {
                         setSelectedCategory('All');
                         setSelectedStatus('All');
                       }}
-                      className="text-xs font-semibold text-slate-500 hover:text-teal-700 mr-4 transition-colors"
+                      className="text-xs font-semibold text-slate-500 hover:text-rose-600 mr-4 transition-colors"
                     >
                       Reset Defaults
                     </button>
@@ -313,8 +309,8 @@ const DetailsView = ({ onBack }) => {
                 </div>
               )}
 
-              <button className="flex items-center px-5 py-2.5 bg-[#0f172a] text-white rounded-lg text-sm font-semibold hover:bg-[#1e293b] hover:shadow-lg transition-all shadow-slate-900/20">
-                <Download className="w-4 h-4 mr-2" /> Export Report
+              <button className="flex items-center px-5 py-2.5 bg-[#0f172a] text-white rounded-xl text-sm font-semibold hover:bg-[#1e293b] hover:shadow-lg hover:shadow-blue-900/20 transition-all">
+                <Download className="w-4 h-4 mr-2" /> Export CSV
               </button>
             </div>
           </div>
@@ -322,108 +318,104 @@ const DetailsView = ({ onBack }) => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto w-full px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity"><ArrowUpRight className="w-16 h-16 text-emerald-600" /></div>
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Total Inflow</p>
+          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Total Inflow</p>
             <div className="flex items-baseline">
-              <span className="text-slate-400 text-lg mr-1 font-medium">₹</span>
-              <p className="text-3xl font-black text-emerald-700">4.2 Cr</p>
+              <span className="text-slate-400 text-lg mr-1">₹</span>
+              <p className="text-3xl font-extrabold text-emerald-600">4.2 Cr</p>
             </div>
           </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity"><ArrowUpRight className="w-16 h-16 text-red-600 rotate-180" /></div>
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Total Outflow</p>
+          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Total Outflow</p>
             <div className="flex items-baseline">
-              <span className="text-slate-400 text-lg mr-1 font-medium">₹</span>
-              <p className="text-3xl font-black text-red-700">3.8 Cr</p>
+              <span className="text-slate-400 text-lg mr-1">₹</span>
+              <p className="text-3xl font-extrabold text-rose-600">3.8 Cr</p>
             </div>
           </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow relative overflow-hidden">
-            <div className="absolute right-0 top-0 h-full w-1.5 bg-gradient-to-b from-teal-500 to-emerald-500"></div>
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Net Cash Flow</p>
-            <p className="text-3xl font-black text-[#0f172a]">+₹40 L</p>
+          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow relative overflow-hidden">
+            <div className="absolute right-0 top-0 h-full w-1 bg-gradient-to-b from-blue-500 to-emerald-500"></div>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Net Cash Flow</p>
+            <p className="text-3xl font-extrabold text-[#0f172a]">+₹40 L</p>
           </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Pending Clearance</p>
+          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Pending Clearance</p>
             <div className="flex items-center">
-              <p className="text-3xl font-black text-amber-600 mr-2">12</p>
-              <span className="text-xs font-bold text-amber-700 bg-amber-100 px-2 py-1 rounded-full uppercase">Transactions</span>
+              <p className="text-3xl font-extrabold text-amber-500 mr-2">12</p>
+              <span className="text-sm font-medium text-amber-600/70 bg-amber-50 px-2 py-0.5 rounded-full">Txns</span>
             </div>
           </div>
         </div>
 
         {/* Detailed Table */}
-        <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden flex flex-col">
-          <div className="p-5 border-b border-slate-200 flex justify-between items-center bg-slate-50/50 shrink-0">
-            <div className="relative max-w-lg w-full group">
+        <div className="bg-white rounded-2xl shadow-xl border border-slate-200/60 overflow-hidden min-h-[500px]">
+          <div className="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50/30">
+            <div className="relative max-w-md w-full group">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Search className="h-4 w-4 text-slate-400 group-focus-within:text-teal-600 transition-colors" />
+                <Search className="h-4 w-4 text-slate-400 group-focus-within:text-rose-500 transition-colors" />
               </div>
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="block w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-lg leading-5 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 sm:text-sm transition-all shadow-sm"
-                placeholder="Search by transaction ID, category, or description..."
+                className="block w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl leading-5 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 sm:text-sm transition-all"
+                placeholder="Search transaction ID, category or description..."
               />
             </div>
-            <span className="text-sm font-semibold text-slate-600 bg-white px-4 py-1.5 rounded-full border border-slate-200 shadow-sm">
-              Showing <span className="text-teal-700 font-bold">{filteredData.length}</span> / {allDetailedData.length} Records
+            <span className="text-sm font-medium text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-sm">
+              Showing <span className="text-rose-600 font-bold">{filteredData.length}</span> of {allDetailedData.length}
             </span>
           </div>
 
-          <div className="overflow-x-auto flex-1">
+          <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-slate-100">
-              <thead className="bg-slate-50 sticky top-0 z-10 shadow-sm">
+              <thead className="bg-slate-50/80">
                 <tr>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-widest">ID</th>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-widest">Date</th>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-widest">Category</th>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-widest">Description</th>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-widest">Type</th>
-                  <th scope="col" className="px-6 py-4 text-right text-xs font-bold text-slate-500 uppercase tracking-widest">Amount</th>
-                  <th scope="col" className="px-6 py-4 text-center text-xs font-bold text-slate-500 uppercase tracking-widest">Status</th>
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">ID</th>
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Date</th>
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Category</th>
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Description</th>
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Type</th>
+                  <th scope="col" className="px-6 py-4 text-right text-xs font-bold text-slate-500 uppercase tracking-wider">Amount</th>
+                  <th scope="col" className="px-6 py-4 text-center text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-slate-50">
                 {filteredData.length > 0 ? (
                   filteredData.map((row) => (
-                    <tr key={row.id} className="hover:bg-slate-50 transition-colors group">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#0f172a] font-mono group-hover:text-teal-700 transition-colors">{row.id}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500 font-medium">{row.date}</td>
+                    <tr key={row.id} className="hover:bg-slate-50/80 transition-colors group">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-[#0f172a] font-mono group-hover:text-rose-600 transition-colors">{row.id}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{row.date}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
-                        <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider border ${row.category === 'Pharmacy Procurement' ? 'bg-blue-50 text-blue-700 border-blue-200' :
-                            row.category === 'Consultant Payout' ? 'bg-purple-50 text-purple-700 border-purple-200' :
-                              'bg-slate-100 text-slate-600 border-slate-200'
+                        <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold border ${row.category === 'Pharmacy Procurement' ? 'bg-blue-50 text-blue-700 border-blue-100' :
+                            row.category === 'Consultant Payout' ? 'bg-violet-50 text-violet-700 border-violet-100' :
+                              'bg-slate-100 text-slate-700 border-slate-200'
                           }`}>
                           {row.category}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-sm text-slate-600 max-w-sm truncate font-medium" title={row.description}>{row.description}</td>
+                      <td className="px-6 py-4 text-sm text-slate-600 max-w-xs truncate font-medium" title={row.description}>{row.description}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
-                        <span className={`font-bold ${row.type === 'Credit' ? 'text-emerald-700' : 'text-slate-400'}`}>
+                        <span className={`font-semibold ${row.type === 'Credit' ? 'text-emerald-600' : 'text-slate-400'}`}>
                           {row.type}
                         </span>
                       </td>
-                      <td className={`px-6 py-4 whitespace-nowrap text-sm text-right font-bold font-mono ${row.type === 'Credit' ? 'text-emerald-700' : 'text-[#0f172a]'}`}>
+                      <td className={`px-6 py-4 whitespace-nowrap text-sm text-right font-bold ${row.type === 'Credit' ? 'text-emerald-600' : 'text-[#0f172a]'}`}>
                         {row.type === 'Debit' ? '-' : '+'}₹{Number(row.amount).toLocaleString('en-IN')}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-center text-sm">
                         {row.status === 'Cleared' ? (
                           <div className="flex items-center justify-center">
-                            <div className="bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full flex items-center gap-1.5">
-                              <CheckCircle2 className="w-3.5 h-3.5" />
-                              <span className="text-xs font-bold uppercase">Cleared</span>
+                            <div className="h-6 w-6 rounded-full bg-emerald-50 flex items-center justify-center border border-emerald-100">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                             </div>
                           </div>
                         ) : (
                           <div className="flex items-center justify-center">
-                            <div className="bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1 rounded-full flex items-center gap-1.5">
-                              <Clock className="w-3.5 h-3.5" />
-                              <span className="text-xs font-bold uppercase">Pending</span>
+                            <div className="h-6 w-6 rounded-full bg-amber-50 flex items-center justify-center border border-amber-100">
+                              <Clock className="w-3.5 h-3.5 text-amber-500" />
                             </div>
                           </div>
                         )}
@@ -432,20 +424,20 @@ const DetailsView = ({ onBack }) => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="7" className="px-6 py-24 text-center text-slate-500">
+                    <td colSpan="7" className="px-6 py-20 text-center text-slate-500">
                       <div className="flex flex-col items-center justify-center">
-                        <div className="bg-slate-50 p-6 rounded-full mb-4 border border-slate-100">
-                          <Search className="w-10 h-10 text-slate-300" />
+                        <div className="bg-slate-50 p-4 rounded-full mb-3">
+                          <Search className="w-8 h-8 text-slate-300" />
                         </div>
-                        <p className="text-lg font-bold text-slate-700">No transactions found</p>
-                        <p className="text-sm text-slate-400 mt-1 max-w-sm">We couldn't find any records matching your current filters or search term.</p>
+                        <p className="text-base font-semibold text-slate-700">No transactions found</p>
+                        <p className="text-sm text-slate-400 mt-1 max-w-xs">We couldn't find any records matching your current filters or search term.</p>
                         <button
                           onClick={() => {
                             setSearchTerm('');
                             setSelectedCategory('All');
                             setSelectedStatus('All');
                           }}
-                          className="mt-6 text-teal-700 bg-teal-50 border border-teal-200 px-4 py-2 rounded-lg text-sm font-bold hover:bg-teal-100 transition-colors"
+                          className="mt-4 text-rose-600 text-sm font-semibold hover:text-rose-700 transition-colors"
                         >
                           Clear all filters
                         </button>
@@ -458,7 +450,7 @@ const DetailsView = ({ onBack }) => {
           </div>
 
           {/* Pagination */}
-          <div className="bg-slate-50 px-6 py-4 border-t border-slate-200 flex items-center justify-between shrink-0">
+          <div className="bg-slate-50 px-6 py-4 border-t border-slate-200 flex items-center justify-between">
             <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
               <div>
                 <p className="text-sm text-slate-500 font-medium">
@@ -572,24 +564,24 @@ export default function App() {
     { month: 'May', amount: 3.61, color: 'bg-rose-200' }, // 361,773
     { month: 'Jun', amount: 19.36, color: 'bg-rose-500' }, // 1,936,996
     { month: 'Jul', amount: 11.26, color: 'bg-rose-400' }, // 1,126,163
-    { month: 'Aug', amount: 27.45, color: 'bg-red-700' }, // 2,745,974 - Darker red for peak
-    { month: 'Sep', amount: 4.32, color: 'bg-red-300' }, // 432,403
-    { month: 'Oct', amount: 15.41, color: 'bg-red-500' }, // 1,541,420
-    { month: 'Nov', amount: 0, color: 'bg-slate-200' },   // No data in summary
+    { month: 'Aug', amount: 27.45, color: 'bg-rose-600' }, // 2,745,974
+    { month: 'Sep', amount: 4.32, color: 'bg-rose-300' }, // 432,403
+    { month: 'Oct', amount: 15.41, color: 'bg-rose-500' }, // 1,541,420
+    { month: 'Nov', amount: 0, color: 'bg-slate-200' },    // No data in summary
     { month: 'Dec', amount: 0, color: 'bg-slate-200' },
   ];
 
   // Updated Violations Data with Margin % derived from EXCESS>30K.csv and Month files
   const violations = [
-    { month: "Apr '25", item: "DUPHASTON 10MG TAB", batch: "SAVA5005", excess: "₹69,317", margin: "22.72", status: "CRITICAL", statusColor: "bg-red-100 text-red-800 border border-red-200" },
-    { month: "May '25", item: "DUPHASTON 10MG TAB", batch: "SAVA5011", excess: "₹64,985", margin: "22.72", status: "CRITICAL", statusColor: "bg-red-100 text-red-800 border border-red-200" },
-    { month: "May '25", item: "FOLISURGE 1200 IU", batch: "7070145", excess: "₹33,313", margin: "5.15", status: "HIGH RISK", statusColor: "bg-orange-100 text-orange-800 border border-orange-200" },
-    { month: "Jun '25", item: "RECAGON 300IU", batch: "B120512", excess: "₹52,450", margin: "5.30", status: "CRITICAL", statusColor: "bg-red-100 text-red-800 border border-red-200" },
-    { month: "Jul '25", item: "VISANNE 28 TAB", batch: "WEX9K3", excess: "₹1,59,053", margin: "4.85", status: "CRITICAL", statusColor: "bg-red-100 text-red-800 border border-red-200" },
-    { month: "Jul '25", item: "REVERSEE INJ 100MG", batch: "1988039.", excess: "₹65,103", margin: "5.20", status: "CRITICAL", statusColor: "bg-red-100 text-red-800 border border-red-200" },
-    { month: "Aug '25", item: "ZERODOL SP TAB", batch: "FND0725", excess: "₹32,480", margin: "5.30", status: "HIGH RISK", statusColor: "bg-orange-100 text-orange-800 border border-orange-200" },
-    { month: "Sep '25", item: "ZERODOL TC TAB", batch: "0125008BH", excess: "₹28,020", margin: "4.51", status: "WARNING", statusColor: "bg-amber-50 text-amber-700 border border-amber-100" },
-    { month: "Oct '25", item: "3M AVAGARD HANDRUB", batch: "R092506", excess: "₹35,999", margin: "4.17", status: "WARNING", statusColor: "bg-amber-50 text-amber-700 border border-amber-100" },
+    { month: "Apr '25", item: "DUPHASTON 10MG TAB", batch: "SAVA5005", excess: "₹69,317", margin: "22.72", status: "CRITICAL", statusColor: "bg-rose-100 text-rose-700 border border-rose-200" },
+    { month: "May '25", item: "DUPHASTON 10MG TAB", batch: "SAVA5011", excess: "₹64,985", margin: "22.72", status: "CRITICAL", statusColor: "bg-rose-100 text-rose-700 border border-rose-200" },
+    { month: "May '25", item: "FOLISURGE 1200 IU", batch: "7070145", excess: "₹33,313", margin: "5.15", status: "HIGH RISK", statusColor: "bg-rose-50 text-rose-600 border border-rose-100" },
+    { month: "Jun '25", item: "RECAGON 300IU", batch: "B120512", excess: "₹52,450", margin: "5.30", status: "CRITICAL", statusColor: "bg-rose-100 text-rose-700 border border-rose-200" },
+    { month: "Jul '25", item: "VISANNE 28 TAB", batch: "WEX9K3", excess: "₹1,59,053", margin: "4.85", status: "CRITICAL", statusColor: "bg-rose-100 text-rose-700 border border-rose-200" },
+    { month: "Jul '25", item: "REVERSEE INJ 100MG", batch: "1988039.", excess: "₹65,103", margin: "5.20", status: "CRITICAL", statusColor: "bg-red-100 text-red-700" },
+    { month: "Aug '25", item: "ZERODOL SP TAB", batch: "FND0725", excess: "₹32,480", margin: "5.30", status: "HIGH RISK", statusColor: "bg-amber-100 text-amber-700 border border-amber-200" },
+    { month: "Sep '25", item: "ZERODOL TC TAB", batch: "0125008BH", excess: "₹28,020", margin: "4.51", status: "WARNING", statusColor: "bg-amber-50 text-amber-600 border border-amber-100" },
+    { month: "Oct '25", item: "3M AVAGARD HANDRUB", batch: "R092506", excess: "₹35,999", margin: "4.17", status: "WARNING", statusColor: "bg-amber-50 text-amber-600 border border-amber-100" },
   ];
 
   // Mock data for the prototype
@@ -1076,269 +1068,6 @@ export default function App() {
     );
   };
 
-  const renderPayouts = () => {
-    // Flatten doctors list for table display (just taking first 6 for demo)
-    const flatDocList = departmentsData.flatMap(dept =>
-      dept.doctors.map(doc => ({
-        name: doc,
-        dept: dept.name,
-        // Generating random realistic stats
-        procedures: Math.floor(Math.random() * 50) + 10,
-        opd: Math.floor(Math.random() * 200) + 50,
-        payout: (Math.random() * 8 + 2).toFixed(2) // in Lakhs
-      }))
-    ).slice(0, 15); // Show top 15
-
-    return (
-      <div className="space-y-6 animate-in fade-in duration-500">
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-          <div className="flex justify-between items-center mb-6">
-            <div>
-              <h3 className="text-lg font-bold text-[#0a2540] flex items-center mb-2">
-                <Stethoscope className="w-5 h-5 mr-2 text-blue-600" />
-                Automated Variable Pay Engine
-              </h3>
-              <p className="text-sm text-slate-500">Replaces manual Excel compilation. Rules codified based on CEO/Investor agreements. Zero month-end spillover.</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="border border-slate-200 rounded-lg p-4 bg-slate-50">
-              <h4 className="font-semibold text-[#0a2540] mb-2">Consultant - Payout Rules</h4>
-              <ul className="text-sm space-y-2 text-slate-600">
-                <li className="flex justify-between"><span>OPD Consultations:</span> <span className="font-medium">20% Cut</span></li>
-                <li className="flex justify-between"><span>Standard Procedure:</span> <span className="font-medium">15% Cut</span></li>
-                <li className="flex justify-between"><span>Complex Procedures:</span> <span className="font-medium">25% Cut</span></li>
-              </ul>
-            </div>
-            <div className="border border-blue-100 rounded-lg p-4 bg-blue-50 flex flex-col justify-center items-center text-center">
-              <CheckCircle2 className="w-8 h-8 text-blue-600 mb-2" />
-              <h4 className="font-bold text-blue-900">100% System Calculated</h4>
-              <p className="text-xs text-blue-700 mt-1">Manual intervention disabled. Audit trail active.</p>
-            </div>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse min-w-[600px]">
-              <thead>
-                <tr className="bg-slate-50 text-slate-500 text-sm border-y border-slate-200">
-                  <th className="p-3 font-medium">Doctor Name</th>
-                  <th className="p-3 font-medium">Department</th>
-                  <th className="p-3 font-medium">Volume (Month)</th>
-                  <th className="p-3 font-medium">Generated Payout</th>
-                  <th className="p-3 font-medium">Status</th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                {flatDocList.map((doc, i) => (
-                  <tr key={i} className="border-b border-slate-100 hover:bg-slate-50">
-                    <td className="p-3 font-medium text-[#0a2540]">{doc.name}</td>
-                    <td className="p-3 text-slate-500 text-xs font-medium uppercase tracking-wide">{doc.dept}</td>
-                    <td className="p-3 text-slate-600">{doc.procedures} Proc / {doc.opd} OPD</td>
-                    <td className="p-3 font-bold text-[#0a2540]">₹{doc.payout} L</td>
-                    <td className="p-3"><span className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-medium">Ready to disburse</span></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const renderAudit = () => (
-    <div className="space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-        <h3 className="text-lg font-bold text-[#0a2540] flex items-center mb-6">
-          <FileText className="w-5 h-5 mr-2 text-pink-600" />
-          Internal Financial Controls (IFC) Audit Trail
-        </h3>
-
-        <div className="space-y-4">
-          <div className="p-4 border border-red-200 bg-red-50 rounded-lg flex items-start">
-            <AlertTriangle className="w-5 h-5 text-red-600 mr-3 mt-0.5" />
-            <div>
-              <h4 className="font-bold text-red-900 text-sm flex items-center">
-                MATERIAL WEAKNESS DETECTED: MedMart Procurement
-                <span className="ml-2 bg-red-100 text-red-700 text-[10px] px-2 py-0.5 rounded-full border border-red-200">High Severity</span>
-              </h4>
-              <p className="text-sm text-red-800 mt-1">
-                <span className="font-bold">Deficiency:</span> Existing controls failed to prevent/detect purchase margins exceeding the 4% cap, resulting in a <strong>material misstatement of ₹84.47L</strong> (Apr-Oct '25).
-                <br />
-                <span className="font-bold">Remediation:</span> Automated API validation deployed. Invoices {'>'}4% margin are now auto-rejected effectively closing this control gap.
-              </p>
-            </div>
-          </div>
-
-          <div className="p-4 border border-emerald-200 bg-emerald-50 rounded-lg flex items-start">
-            <CheckCircle2 className="w-5 h-5 text-emerald-600 mr-3 mt-0.5" />
-            <div>
-              <h4 className="font-bold text-emerald-900 text-sm">Control Deficiency Resolved: Variable Pay Delays</h4>
-              <p className="text-sm text-emerald-800 mt-1">
-                <span className="font-bold">Status:</span> <strong>Effective.</strong> Manual calculation (prone to error) replaced by Business Rules Engine. Reasonable assurance obtained that doctor payouts match HIS procedure data 100%.
-              </p>
-            </div>
-          </div>
-
-          <div className="p-4 border border-emerald-200 bg-emerald-50 rounded-lg flex items-start">
-            <CheckCircle2 className="w-5 h-5 text-emerald-600 mr-3 mt-0.5" />
-            <div>
-              <h4 className="font-bold text-emerald-900 text-sm">Significant Deficiency Closed: Clinical Billing (SOP)</h4>
-              <p className="text-sm text-emerald-800 mt-1">
-                <span className="font-bold">Status:</span> <strong>Effective.</strong> Billing system now strictly enforces SOP templates. Risk of revenue leakage from unbilled consumables is now mitigated.
-              </p>
-            </div>
-          </div>
-
-          <div className="p-4 border border-amber-200 bg-amber-50 rounded-lg flex items-start">
-            <RefreshCw className="w-5 h-5 text-amber-600 mr-3 mt-0.5 animate-spin" />
-            <div>
-              <h4 className="font-bold text-amber-900 text-sm">Ongoing Observation: IND AS Transition</h4>
-              <p className="text-sm text-amber-800 mt-1">
-                <span className="font-bold">Status:</span> <strong>In Progress.</strong> Dual-ledger system active to ensure financial statements are free of material misstatement during the IPO transition.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderMIS = () => (
-    <div className="space-y-6 animate-in fade-in duration-500">
-      {/* Top KPIs */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {[
-          { label: 'Consolidated Revenue', value: '₹30.9 Cr', trend: '+12%', color: 'border-blue-600', icon: 'text-blue-600' },
-          { label: 'Consolidated EBITDA', value: '₹7.3 Cr', trend: '+8%', color: 'border-pink-600', icon: 'text-pink-600' },
-          { label: 'MedMart Cost Leakage', value: '₹84.47 L', trend: '+Alert', color: 'border-red-500', icon: 'text-red-500', note: 'Exceeds 4% margin' },
-          { label: 'Unreconciled Payouts', value: '₹0.00', trend: '100% Auto', color: 'border-violet-500', icon: 'text-violet-500' }
-        ].map((kpi, i) => (
-          <div key={i} className={`bg-white p-5 rounded-xl border-l-4 shadow-sm hover:shadow-md transition-shadow ${kpi.color}`}>
-            <div className="flex justify-between items-start mb-2">
-              <p className="text-sm font-medium text-slate-500">{kpi.label}</p>
-              <Activity className={`w-4 h-4 ${kpi.icon} opacity-50`} />
-            </div>
-            <div className="flex items-baseline space-x-2">
-              <h3 className="text-2xl font-bold text-[#0a2540]">{kpi.value}</h3>
-              <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${kpi.trend === '+Alert' ? 'text-red-700 bg-red-50 border-red-100' : 'text-emerald-700 bg-emerald-50 border-emerald-100'}`}>{kpi.trend}</span>
-            </div>
-            {kpi.note && <p className="text-xs text-slate-400 mt-2 flex items-center"><AlertTriangle className="w-3 h-3 mr-1" /> {kpi.note}</p>}
-          </div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Unit Wise Consolidation */}
-        <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-lg font-bold text-[#0a2540] flex items-center">
-              <Building2 className="w-5 h-5 mr-2 text-blue-600" />
-              Automated Unit-Wise Consolidation
-            </h3>
-            <span className="text-xs bg-blue-50 text-blue-700 px-3 py-1 rounded-full font-medium border border-blue-100">Real-time TB Sync</span>
-          </div>
-          <div className="space-y-5">
-            {units.map((unit, i) => (
-              <div key={i}>
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="font-medium text-[#0a2540]">{unit.name}</span>
-                  <span className="text-slate-500">₹{unit.revenue} Cr Rev / ₹{unit.ebitda} Cr EBITDA</span>
-                </div>
-                <div className="w-full bg-slate-100 rounded-full h-2.5 flex overflow-hidden">
-                  <div className="bg-[#0a2540] h-2.5" style={{ width: `${(unit.revenue / 15) * 100}%` }}></div>
-                  <div className="bg-pink-500 h-2.5" style={{ width: `${(unit.ebitda / 15) * 100}%` }}></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Cash Flow Generator View */}
-        <div className="bg-[#0a2540] rounded-xl shadow-lg shadow-blue-900/20 p-6 text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-40 h-40 bg-pink-600 opacity-20 rounded-full -mr-12 -mt-12 blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500 opacity-20 rounded-full -ml-10 -mb-10 blur-2xl"></div>
-
-          <h3 className="text-lg font-bold mb-4 flex items-center relative z-10">
-            <RefreshCw className="w-5 h-5 mr-2 text-pink-400" />
-            Cash Flow Automation
-          </h3>
-
-          {cfGenerated ? (
-            <div className="space-y-4 animate-in slide-in-from-bottom-4 duration-500 relative z-10">
-              <div className="p-3 bg-white/5 border border-white/10 rounded-lg flex items-center justify-between backdrop-blur-sm">
-                <div className="flex items-center">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400 mr-2" />
-                  <div>
-                    <p className="text-sm font-medium text-white">Process Complete</p>
-                    <p className="text-xs text-slate-300">Statement generated successfully.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex gap-3 mt-4">
-                <button
-                  onClick={() => setCurrentView('details')}
-                  className="flex-1 bg-white/10 hover:bg-white/20 text-white py-2.5 rounded-lg text-sm font-medium flex justify-center items-center transition-colors"
-                >
-                  <Eye className="w-4 h-4 mr-2" /> View Details
-                </button>
-                <button
-                  onClick={handleExportCF}
-                  className="flex-1 bg-pink-600 hover:bg-pink-700 text-white py-2.5 rounded-lg text-sm font-medium flex justify-center items-center transition-colors shadow-lg shadow-pink-600/20"
-                >
-                  <FileDown className="w-4 h-4 mr-2" /> Export Report
-                </button>
-              </div>
-            </div>
-          ) : (
-            <div className="flex flex-col items-center justify-center h-48 text-center text-slate-400 relative z-10">
-              <FileText className="w-12 h-12 mb-3 opacity-30 text-pink-200" />
-              <p className="text-sm text-slate-300">Consolidated CF not generated yet for current period.</p>
-              <p className="text-xs mt-2 text-slate-400">Click "Generate Cash Flow" above.</p>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* NEW SECTION: Consolidated MedMart Analysis */}
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-        <div className="flex justify-between items-center mb-6">
-          <h3 className="text-lg font-bold text-[#0a2540] flex items-center">
-            <TrendingUp className="w-5 h-5 mr-2 text-red-500" />
-            Consolidated MedMart Cost Leakage Trend (Apr - Oct 2025)
-          </h3>
-          <span className="text-sm font-medium text-slate-500">Total Excess: <span className="text-red-600 font-bold">₹84.47 L</span></span>
-        </div>
-        {/* Reusing the chart logic */}
-        <div className="h-48 w-full bg-slate-50 rounded border border-slate-100 flex items-end p-4 space-x-4 relative">
-          {/* Curve Overlay */}
-          <div className="absolute inset-0 p-4 pointer-events-none opacity-50">
-            <SvgCurveChart data={monthlyLeakage.filter(m => m.amount > 0 || m.month === 'Apr')} color="#0a2540" />
-          </div>
-
-          {monthlyLeakage.filter(m => m.amount > 0 || m.month === 'Apr').map((item, i) => (
-            <div key={i} className="flex-1 flex flex-col items-center group relative z-10">
-              {/* Tooltip */}
-              <div className="absolute -top-10 bg-slate-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">
-                ₹{item.amount}L
-              </div>
-              <div
-                className={`w-full ${item.color} rounded-t-sm transition-all duration-500`}
-                style={{ height: `${(item.amount / 30) * 100}%` }}
-              ></div>
-              <div className="text-xs font-medium text-slate-500 mt-2">{item.month}</div>
-            </div>
-          ))}
-        </div>
-        <p className="text-xs text-slate-400 mt-4 text-center">
-          Aggregated analysis of purchase margins exceeding 4% cap. Peak leakage observed in August 2025 (₹27.46L).
-        </p>
-      </div>
-    </div>
-  );
-
   // --- Render Functions for New Modules ---
 
   const renderFinancialStmts = () => (
@@ -1630,6 +1359,408 @@ export default function App() {
           <div>
             <p className="text-xs font-bold text-slate-700">Avg. OPD Wait Time</p>
             <p className="text-sm text-[#0a2540]">18 Mins <span className="text-xs text-green-600">(-2m vs last month)</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderMIS = () => (
+    <div className="space-y-6 animate-in fade-in duration-500">
+      {/* Top KPIs */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { label: 'Consolidated Revenue', value: '₹30.9 Cr', trend: '+12%', color: 'border-blue-600', icon: 'text-blue-600' },
+          { label: 'Consolidated EBITDA', value: '₹7.3 Cr', trend: '+8%', color: 'border-pink-600', icon: 'text-pink-600' },
+          { label: 'MedMart Cost Leakage', value: '₹84.47 L', trend: '+Alert', color: 'border-red-500', icon: 'text-red-500', note: 'Exceeds 4% margin' },
+          { label: 'Unreconciled Payouts', value: '₹0.00', trend: '100% Auto', color: 'border-violet-500', icon: 'text-violet-500' }
+        ].map((kpi, i) => (
+          <div key={i} className={`bg-white p-5 rounded-xl border-l-4 shadow-sm hover:shadow-md transition-shadow ${kpi.color}`}>
+            <div className="flex justify-between items-start mb-2">
+              <p className="text-sm font-medium text-slate-500">{kpi.label}</p>
+              <Activity className={`w-4 h-4 ${kpi.icon} opacity-50`} />
+            </div>
+            <div className="flex items-baseline space-x-2">
+              <h3 className="text-2xl font-bold text-[#0a2540]">{kpi.value}</h3>
+              <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${kpi.trend === '+Alert' ? 'text-red-700 bg-red-50 border-red-100' : 'text-emerald-700 bg-emerald-50 border-emerald-100'}`}>{kpi.trend}</span>
+            </div>
+            {kpi.note && <p className="text-xs text-slate-400 mt-2 flex items-center"><AlertTriangle className="w-3 h-3 mr-1" /> {kpi.note}</p>}
+          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Unit Wise Consolidation */}
+        <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-lg font-bold text-[#0a2540] flex items-center">
+              <Building2 className="w-5 h-5 mr-2 text-blue-600" />
+              Automated Unit-Wise Consolidation
+            </h3>
+            <span className="text-xs bg-blue-50 text-blue-700 px-3 py-1 rounded-full font-medium border border-blue-100">Real-time TB Sync</span>
+          </div>
+          <div className="space-y-5">
+            {units.map((unit, i) => (
+              <div key={i}>
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="font-medium text-[#0a2540]">{unit.name}</span>
+                  <span className="text-slate-500">₹{unit.revenue} Cr Rev / ₹{unit.ebitda} Cr EBITDA</span>
+                </div>
+                <div className="w-full bg-slate-100 rounded-full h-2.5 flex overflow-hidden">
+                  <div className="bg-[#0a2540] h-2.5" style={{ width: `${(unit.revenue / 15) * 100}%` }}></div>
+                  <div className="bg-pink-500 h-2.5" style={{ width: `${(unit.ebitda / 15) * 100}%` }}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Cash Flow Generator View */}
+        <div className="bg-[#0a2540] rounded-xl shadow-lg shadow-blue-900/20 p-6 text-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-40 h-40 bg-pink-600 opacity-20 rounded-full -mr-12 -mt-12 blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500 opacity-20 rounded-full -ml-10 -mb-10 blur-2xl"></div>
+
+          <h3 className="text-lg font-bold mb-4 flex items-center relative z-10">
+            <RefreshCw className="w-5 h-5 mr-2 text-pink-400" />
+            Cash Flow Automation
+          </h3>
+
+          {cfGenerated ? (
+            <div className="space-y-4 animate-in slide-in-from-bottom-4 duration-500 relative z-10">
+              <div className="p-3 bg-white/5 border border-white/10 rounded-lg flex items-center justify-between backdrop-blur-sm">
+                <div className="flex items-center">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-400 mr-2" />
+                  <div>
+                    <p className="text-sm font-medium text-white">Process Complete</p>
+                    <p className="text-xs text-slate-300">Statement generated successfully.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-4">
+                <button
+                  onClick={() => setCurrentView('details')}
+                  className="flex-1 bg-white/10 hover:bg-white/20 text-white py-2.5 rounded-lg text-sm font-medium flex justify-center items-center transition-colors"
+                >
+                  <Eye className="w-4 h-4 mr-2" /> View Details
+                </button>
+                <button
+                  onClick={handleExportCF}
+                  className="flex-1 bg-pink-600 hover:bg-pink-700 text-white py-2.5 rounded-lg text-sm font-medium flex justify-center items-center transition-colors shadow-lg shadow-pink-600/20"
+                >
+                  <FileDown className="w-4 h-4 mr-2" /> Export Report
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center h-48 text-center text-slate-400 relative z-10">
+              <FileText className="w-12 h-12 mb-3 opacity-30 text-pink-200" />
+              <p className="text-sm text-slate-300">Consolidated CF not generated yet for current period.</p>
+              <p className="text-xs mt-2 text-slate-400">Click "Generate Cash Flow" above.</p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* NEW SECTION: Consolidated MedMart Analysis */}
+      <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="text-lg font-bold text-[#0a2540] flex items-center">
+            <TrendingUp className="w-5 h-5 mr-2 text-red-500" />
+            Consolidated MedMart Cost Leakage Trend (Apr - Oct 2025)
+          </h3>
+          <span className="text-sm font-medium text-slate-500">Total Excess: <span className="text-red-600 font-bold">₹84.47 L</span></span>
+        </div>
+        {/* Reusing the chart logic */}
+        <div className="h-48 w-full bg-slate-50 rounded border border-slate-100 flex items-end p-4 space-x-4 relative">
+          {/* Curve Overlay */}
+          <div className="absolute inset-0 p-4 pointer-events-none opacity-50">
+            <SvgCurveChart data={monthlyLeakage.filter(m => m.amount > 0 || m.month === 'Apr')} color="#0a2540" />
+          </div>
+
+          {monthlyLeakage.filter(m => m.amount > 0 || m.month === 'Apr').map((item, i) => (
+            <div key={i} className="flex-1 flex flex-col items-center group relative z-10">
+              {/* Tooltip */}
+              <div className="absolute -top-10 bg-slate-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">
+                ₹{item.amount}L
+              </div>
+              <div
+                className={`w-full ${item.color} rounded-t-sm transition-all duration-500`}
+                style={{ height: `${(item.amount / 30) * 100}%` }}
+              ></div>
+              <div className="text-xs font-medium text-slate-500 mt-2">{item.month}</div>
+            </div>
+          ))}
+        </div>
+        <p className="text-xs text-slate-400 mt-4 text-center">
+          Aggregated analysis of purchase margins exceeding 4% cap. Peak leakage observed in August 2025 (₹27.46L).
+        </p>
+      </div>
+    </div>
+  );
+
+  const renderIVF = () => (
+    <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+        <h3 className="text-lg font-bold text-[#0a2540] flex items-center mb-6">
+          <Activity className="w-5 h-5 mr-2 text-pink-600" />
+          Clinical Operations & SOP Tracking
+        </h3>
+        <p className="text-sm text-slate-500 mb-6">Tracking compliance and billing for ongoing Clinical cycles based on the standard operating procedure (SOP).</p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="p-5 bg-pink-50 rounded-xl border border-pink-100">
+            <p className="text-sm font-medium text-pink-800">Active Cycles</p>
+            <h4 className="text-3xl font-bold text-pink-600 mt-2">42</h4>
+          </div>
+          <div className="p-5 bg-blue-50 rounded-xl border border-blue-100">
+            <p className="text-sm font-medium text-blue-800">SOP Compliance Rate</p>
+            <h4 className="text-3xl font-bold text-blue-600 mt-2">100%</h4>
+          </div>
+          <div className="p-5 bg-emerald-50 rounded-xl border border-emerald-100">
+            <p className="text-sm font-medium text-emerald-800">Billing Discrepancies</p>
+            <h4 className="text-3xl font-bold text-emerald-600 mt-2">0</h4>
+          </div>
+        </div>
+
+        <div className="p-4 border border-blue-100 bg-blue-50/50 rounded-lg">
+          <h4 className="font-bold text-[#0a2540] mb-2 flex items-center">
+            <ShieldCheck className="w-4 h-4 mr-2 text-blue-600" />
+            SOP Enforcement Protocol Active
+          </h4>
+          <p className="text-sm text-slate-600">The billing system is currently locked to SOP templates. A clinical cycle cannot be marked as "Complete" without matching mandatory consumables, lab data, and specific doctor tags. This mitigates the revenue leakage previously flagged by the auditors.</p>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderPharmacy = () => {
+    return (
+      <div className="space-y-6 animate-in fade-in duration-500">
+        {/* New Summary Section */}
+        <div className="bg-[#0a2540] text-white p-6 rounded-xl shadow-lg relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-pink-600/20 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+          <div className="relative z-10">
+            <h3 className="text-lg font-bold flex items-center mb-3">
+              <FileText className="w-5 h-5 mr-2 text-pink-400" />
+              MedMart Analysis Executive Summary
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
+                <p className="text-xs text-slate-300 uppercase tracking-wider">Total Excess Payout</p>
+                <p className="text-2xl font-bold text-white mt-1">₹84.47 Lakhs</p>
+                <p className="text-xs text-red-300 mt-1 flex items-center"><TrendingUp className="w-3 h-3 mr-1" /> Apr - Oct 2025</p>
+              </div>
+              <div className="col-span-2 text-sm text-slate-200 leading-relaxed">
+                <p className="mb-2"><strong className="text-pink-300">Observation:</strong> Significant margin leakage detected, peaking in <strong>August (₹27.46L)</strong> and <strong>June (₹19.37L)</strong>. The trend correlates with bulk procurement cycles.</p>
+                <p><strong className="text-blue-300">Root Cause:</strong> High-value <span className="underline decoration-pink-500/50">Clinical & Hormonal drugs</span> (Duphaston, Folisurge, Visanne) and <span className="underline decoration-blue-500/50">Pain Management</span> (Zerodol) are consistently billed above the 4% margin cap due to lack of real-time API validation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <div>
+              <h3 className="text-lg font-bold text-[#0a2540] flex items-center">
+                <AlertTriangle className="w-5 h-5 mr-2 text-red-500" />
+                Monthly Margin Breach Trend
+              </h3>
+            </div>
+            <div className="flex items-center space-x-2 text-sm font-medium bg-red-50 text-red-700 px-4 py-2 rounded-lg border border-red-200">
+              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+              <span>Audit Flag Active</span>
+            </div>
+          </div>
+
+          {/* Monthly Trend Visualizer */}
+          <div className="mb-8 p-4 bg-slate-50 rounded-xl border border-slate-200 overflow-x-auto">
+            <h4 className="text-sm font-bold text-slate-700 mb-4 flex items-center">
+              <TrendingUp className="w-4 h-4 mr-2" /> Monthly Excess Payout (In Lakhs)
+            </h4>
+            <div className="flex items-end space-x-2 md:space-x-3 h-40 min-w-[600px] relative">
+              {/* Curve Overlay */}
+              <div className="absolute inset-0 p-0 pointer-events-none opacity-50 z-20">
+                <SvgCurveChart data={monthlyLeakage} color="#0a2540" />
+              </div>
+
+              {monthlyLeakage.map((item, i) => (
+                <div key={i} className="flex-1 flex flex-col items-center group relative z-10">
+                  <div className="absolute -top-8 text-xs font-bold text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity bg-white px-2 py-1 rounded shadow-sm border border-slate-100 z-10">₹{item.amount}L</div>
+                  <div
+                    className={`w-full rounded-t-sm transition-all hover:brightness-110 ${item.color}`}
+                    style={{ height: item.amount > 0 ? `${(item.amount / 30) * 100}%` : '4px' }}
+                  ></div>
+                  <div className="text-xs font-medium text-slate-500 mt-2">{item.month}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <h4 className="text-sm font-bold text-[#0a2540] mb-3">High Value Violations ({'>'} ₹30k Excess)</h4>
+            <table className="w-full text-left border-collapse min-w-[600px]">
+              <thead>
+                <tr className="bg-slate-50 text-slate-500 text-sm border-b border-slate-200">
+                  <th className="p-3 font-medium rounded-tl-lg">Month</th>
+                  <th className="p-3 font-medium">Item Name</th>
+                  <th className="p-3 font-medium">Batch No.</th>
+                  <th className="p-3 font-medium text-right">Margin %</th>
+                  <th className="p-3 font-medium text-right">Excess Amt</th>
+                  <th className="p-3 font-medium">Action</th>
+                  <th className="p-3 font-medium rounded-tr-lg">Status</th>
+                </tr>
+              </thead>
+              <tbody className="text-sm">
+                {violations.map((v, i) => (
+                  <tr key={i} className="border-b border-slate-100 hover:bg-red-50/30">
+                    <td className="p-3 font-medium text-slate-600">{v.month}</td>
+                    <td className="p-3 font-bold text-[#0a2540]">{v.item}</td>
+                    <td className="p-3 font-mono text-xs text-slate-500">{v.batch}</td>
+                    <td className="p-3 font-bold text-red-600 text-right">{v.margin}%</td>
+                    <td className="p-3 font-bold text-red-600 text-right">{v.excess}</td>
+                    <td className="p-3">
+                      <button
+                        onClick={() => handleViewInvoice(v)}
+                        className="text-blue-600 hover:underline text-xs flex items-center"
+                      >
+                        View Invoice <ArrowUpRight className="w-3 h-3 ml-1" />
+                      </button>
+                    </td>
+                    <td className="p-3"><span className={`${v.statusColor} px-2 py-1 rounded text-xs font-bold`}>{v.status}</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderPayouts = () => {
+    // Flatten doctors list for table display (just taking first 6 for demo)
+    const flatDocList = departmentsData.flatMap(dept =>
+      dept.doctors.map(doc => ({
+        name: doc,
+        dept: dept.name,
+        // Generating random realistic stats
+        procedures: Math.floor(Math.random() * 50) + 10,
+        opd: Math.floor(Math.random() * 200) + 50,
+        payout: (Math.random() * 8 + 2).toFixed(2) // in Lakhs
+      }))
+    ).slice(0, 15); // Show top 15
+
+    return (
+      <div className="space-y-6 animate-in fade-in duration-500">
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+          <div className="flex justify-between items-center mb-6">
+            <div>
+              <h3 className="text-lg font-bold text-[#0a2540] flex items-center mb-2">
+                <Stethoscope className="w-5 h-5 mr-2 text-blue-600" />
+                Automated Variable Pay Engine
+              </h3>
+              <p className="text-sm text-slate-500">Replaces manual Excel compilation. Rules codified based on CEO/Investor agreements. Zero month-end spillover.</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="border border-slate-200 rounded-lg p-4 bg-slate-50">
+              <h4 className="font-semibold text-[#0a2540] mb-2">Consultant - Payout Rules</h4>
+              <ul className="text-sm space-y-2 text-slate-600">
+                <li className="flex justify-between"><span>OPD Consultations:</span> <span className="font-medium">20% Cut</span></li>
+                <li className="flex justify-between"><span>Standard Procedure:</span> <span className="font-medium">15% Cut</span></li>
+                <li className="flex justify-between"><span>Complex Procedures:</span> <span className="font-medium">25% Cut</span></li>
+              </ul>
+            </div>
+            <div className="border border-blue-100 rounded-lg p-4 bg-blue-50 flex flex-col justify-center items-center text-center">
+              <CheckCircle2 className="w-8 h-8 text-blue-600 mb-2" />
+              <h4 className="font-bold text-blue-900">100% System Calculated</h4>
+              <p className="text-xs text-blue-700 mt-1">Manual intervention disabled. Audit trail active.</p>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse min-w-[600px]">
+              <thead>
+                <tr className="bg-slate-50 text-slate-500 text-sm border-y border-slate-200">
+                  <th className="p-3 font-medium">Doctor Name</th>
+                  <th className="p-3 font-medium">Department</th>
+                  <th className="p-3 font-medium">Volume (Month)</th>
+                  <th className="p-3 font-medium">Generated Payout</th>
+                  <th className="p-3 font-medium">Status</th>
+                </tr>
+              </thead>
+              <tbody className="text-sm">
+                {flatDocList.map((doc, i) => (
+                  <tr key={i} className="border-b border-slate-100 hover:bg-slate-50">
+                    <td className="p-3 font-medium text-[#0a2540]">{doc.name}</td>
+                    <td className="p-3 text-slate-500 text-xs font-medium uppercase tracking-wide">{doc.dept}</td>
+                    <td className="p-3 text-slate-600">{doc.procedures} Proc / {doc.opd} OPD</td>
+                    <td className="p-3 font-bold text-[#0a2540]">₹{doc.payout} L</td>
+                    <td className="p-3"><span className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-medium">Ready to disburse</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderAudit = () => (
+    <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+        <h3 className="text-lg font-bold text-[#0a2540] flex items-center mb-6">
+          <FileText className="w-5 h-5 mr-2 text-pink-600" />
+          Internal Financial Controls (IFC) Audit Trail
+        </h3>
+
+        <div className="space-y-4">
+          <div className="p-4 border border-red-200 bg-red-50 rounded-lg flex items-start">
+            <AlertTriangle className="w-5 h-5 text-red-600 mr-3 mt-0.5" />
+            <div>
+              <h4 className="font-bold text-red-900 text-sm flex items-center">
+                MATERIAL WEAKNESS DETECTED: MedMart Procurement
+                <span className="ml-2 bg-red-100 text-red-700 text-[10px] px-2 py-0.5 rounded-full border border-red-200">High Severity</span>
+              </h4>
+              <p className="text-sm text-red-800 mt-1">
+                <span className="font-bold">Deficiency:</span> Existing controls failed to prevent/detect purchase margins exceeding the 4% cap, resulting in a <strong>material misstatement of ₹84.47L</strong> (Apr-Oct '25).
+                <br />
+                <span className="font-bold">Remediation:</span> Automated API validation deployed. Invoices {'>'}4% margin are now auto-rejected effectively closing this control gap.
+              </p>
+            </div>
+          </div>
+
+          <div className="p-4 border border-emerald-200 bg-emerald-50 rounded-lg flex items-start">
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 mr-3 mt-0.5" />
+            <div>
+              <h4 className="font-bold text-emerald-900 text-sm">Control Deficiency Resolved: Variable Pay Delays</h4>
+              <p className="text-sm text-emerald-800 mt-1">
+                <span className="font-bold">Status:</span> <strong>Effective.</strong> Manual calculation (prone to error) replaced by Business Rules Engine. Reasonable assurance obtained that doctor payouts match HIS procedure data 100%.
+              </p>
+            </div>
+          </div>
+
+          <div className="p-4 border border-emerald-200 bg-emerald-50 rounded-lg flex items-start">
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 mr-3 mt-0.5" />
+            <div>
+              <h4 className="font-bold text-emerald-900 text-sm">Significant Deficiency Closed: Clinical Billing (SOP)</h4>
+              <p className="text-sm text-emerald-800 mt-1">
+                <span className="font-bold">Status:</span> <strong>Effective.</strong> Billing system now strictly enforces SOP templates. Risk of revenue leakage from unbilled consumables is now mitigated.
+              </p>
+            </div>
+          </div>
+
+          <div className="p-4 border border-amber-200 bg-amber-50 rounded-lg flex items-start">
+            <RefreshCw className="w-5 h-5 text-amber-600 mr-3 mt-0.5 animate-spin" />
+            <div>
+              <h4 className="font-bold text-amber-900 text-sm">Ongoing Observation: IND AS Transition</h4>
+              <p className="text-sm text-amber-800 mt-1">
+                <span className="font-bold">Status:</span> <strong>In Progress.</strong> Dual-ledger system active to ensure financial statements are free of material misstatement during the IPO transition.
+              </p>
+            </div>
           </div>
         </div>
       </div>
